@@ -1,0 +1,36 @@
+
+{
+	"Cod_Usuario": 1,
+	"Nome_Refeicao": "Jantar",
+	"Data_Refeicao": "2025-06-07",
+	"Hora": ":",
+	"Total_kcal": "60",
+	"Refeicao_Inativa": 0,
+	"Qtd_Alimentos": 1,
+	"Alimentos_Na_Refeicao": " > Refrigerante Coca Cola Original Garrafa 2l",
+	"Alimentos": 
+	[
+		{
+			"Id": 1,
+			"Cod_Barras": "7894900027013",
+			"Nome_Alimento": "Refrigerante Coca Cola Original Garrafa 2l",
+			"Consumo": "200",
+			"Porcoes_Consumidas": "1",
+			"Porcao_Padrao": "200ml",
+			"Kcal_Consumidas": "60",
+			"Kcal_Por_Porcao": "60",
+			"Qtd_Embalagem": "2l"
+		},
+		{
+			"Id": 2,
+			"Cod_Barras": "7894900027014",
+			"Nome_Alimento": "Refrigerante Coca Cola Original Garrafa 1l",
+			"Consumo": "100",
+			"Porcoes_Consumidas": "1",
+			"Porcao_Padrao": "100ml",
+			"Kcal_Consumidas": "30",
+			"Kcal_Por_Porcao": "30",
+			"Qtd_Embalagem": "1l"
+		}
+	]
+}

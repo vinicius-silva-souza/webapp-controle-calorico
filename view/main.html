@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, max-age=0">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <link rel="stylesheet" href="../view/style/main.css">
+    <link rel="stylesheet" href="../view/style/w3.css">
+    <link rel="stylesheet" href="../view/style/normalize.css">
+    <title>APP</title>
+</head>
+<body>
+    <div class="w3-container">
+        <header class="w3-row">
+            <div class="w3-container">
+                <div class="w3-col s3 w3-padding-small">
+                    <div>
+                        <box-icon name='user-circle' size="lg"></box-icon>
+                    </div>
+                </div>
+                <div class="w3-col s8">
+                    <p>Username</p>
+                </div>
+            </div>
+            <hr style="border-top: 2px solid #000; margin: 10px 0;"/>
+            <nav class="w3-center">
+                <div class="w3-col s3 w3-padding-small">
+                    <button id="btn-ultimos-registros"  type="button" class="btn-grp-header w3-white w3-circle w3-padding-small">
+                        <box-icon name="history" size="md"></box-icon>
+                    </button>
+                    <b class="w3-show w3-padding-small w3-tiny">Últimos registros</b>
+                </div>
+                <div class="w3-col s3 w3-padding-small">
+                    <button id="btn-pesquisar-registros"  type="button" class="btn-grp-header w3-white w3-circle w3-padding-small">
+                        <box-icon name="search-alt" size="md"></box-icon>
+                    </button>
+                    <b class="w3-show w3-padding-small w3-tiny">Pesquisar registros</b>
+                </div>
+                <div class="w3-col s3 w3-padding-small">
+                    <button id="btn-ver-relatorios"  type="button" class="btn-grp-header w3-white w3-circle w3-padding-small">
+                        <box-icon name='bar-chart' size="md"></box-icon>
+                    </button>
+                    <b class="w3-show w3-padding-small w3-tiny">Ver relatórios</b>
+                </div>
+                <div class="w3-col s3 w3-padding-small">
+                    <button id="btn-relatorio-diario" type="button" class="btn-grp-header w3-white w3-circle w3-padding-small">
+                        <box-icon name="calendar-star" size="md"></box-icon>
+                    </button>
+                    <b class="w3-show w3-padding-small w3-tiny">Relatório diário</b>
+                </div>
+            </nav>
+        </header>
+        <hr style="border-top: 2px solid #000; margin: 10px 0;"/>
+        <h1 id="container-titulo-funcao" class="w3-center w3-large">
+            <box-icon id="titulo-funcao-icone" name="history" size="md"></box-icon>
+            <b id="titulo-funcao" >Registros de hoje</b>
+        </h1>
+        <hr style="border-top: 2px solid #000; margin: 10px 0;"/>
+        <main>
+            <div class="container-refeicoes">
+                <!-- ULTIMOS REGISTROS -->
+                <div class="card-refeicoes">
+                    <div class="card-refeicoes-conteudo">
+                        <h3 class="card-refeicoes-titulo">Café da manhã</h3>
+                        <div class="card-refeicoes-icone">
+                            <box-icon class="w3-cell w3-cell-middle w3-small" type="regular" name="time" size="sm"></box-icon>
+                            <b>09h30m</b>
+                        </div>
+                    </div>
+                    <div class="card-refeicoes-conteudo">
+                        <details class="card-refeicoes-alimentos">
+                            <summary>Alimentos (4)</summary>
+                            <small>> Coca-Cola > Pão integral > Banana > Laranja</small>
+                        </details>
+                        <div class="card-refeicoes-icone">
+                            <box-icon class="w3-cell w3-cell-middle w3-small" type="solid" name="hot" size="sm"></box-icon>
+                            <b>X kcal</b>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- JANELA: PESQUISAR REGISTROS -->
+            <form id="form-pesquisar-registros" class="janelas w3-display-middle w3-col s10 m3">
+                <fieldset class="w3-card-4 w3-green w3-round-large">
+                    <legend class="w3-green w3-padding-small w3-round-large">
+                        <b class="w3-cell w3-cell-middle w3-padding-small">PESQUISAR REGISTROS</b>
+                        <button id="btn-fechar-registros" type="button" class="w3-border-0 w3-transparent w3-padding-small">
+                            <box-icon class="w3-cell box-icon-x-circle" name='x-circle' type='solid' color='#F08080' ></box-icon>
+                        </button>
+                    </legend>
+                    <div class="w3-col">
+                        <div class="w3-col w3-padding-small">
+                            <label for="date-periodo-inicial" class="w3-col s2">&nbspDe:</label>
+                            <input type="date" id="date-periodo-inicial" name="date-periodos" class="w3-col s10 w3-padding-small w3-round-large w3-border-0" required>
+                        </div>
+                        <div class="w3-col w3-padding-small">
+                            <label for="date-periodo-final" class="w3-col s2">Até:</label>
+                            <input type="date" id="date-periodo-final" name="date-periodos" class="w3-col s10 w3-padding-small w3-round-large w3-border-0" required>
+                        </div>
+                        <div class="w3-col w3-padding-small">
+                            <button type="button" id="btn-filtrar-periodo-1" class="w3-col w3-btn w3-ripple w3-white w3-round-large">Filtrar Período</button>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+            <!-- JANELA: VER RELATÓRIOS -->
+            <form id="form-ver-relatorios" class="janelas w3-display-middle w3-col s10 m3">
+                <fieldset class="w3-card-4 w3-green w3-round-large">
+                    <legend class="w3-green w3-padding-small w3-round-large">
+                        <b class="w3-cell w3-cell-middle w3-padding-small">VISUALIZAR RELATÓRIOS</b>
+                        <button id="btn-fechar-relatorios" type="button" class="w3-border-0 w3-transparent w3-padding-small">
+                            <box-icon class="w3-cell box-icon-x-circle" name='x-circle' type='solid' color='#F08080' ></box-icon>
+                        </button>
+                    </legend>
+                    <div class="w3-col w3-padding-small">
+                        <input type="radio" name="radio-periodos" id="radio-7-dias">
+                        <label for="radio-7-dias">Últimos 7 dias</label>
+                    </div>
+                    <div class="w3-col w3-padding-small">
+                        <input type="radio" name="radio-periodos" id="radio-15-dias">
+                        <label for="radio-15-dias">Últimos 15 dias</label>
+                    </div>
+                    <div class="w3-col w3-padding-small">
+                        <input type="radio" name="radio-periodos" id="radio-30-dias">
+                        <label for="radio-30-dias">Últimos 30 dias</label>
+                    </div>
+                    <div class="w3-col w3-padding-small">
+                        <input type="radio" name="radio-periodos" id="radio-mes">
+                        <label for="radio-mes">Este mês</label>
+                    </div>
+                    <div class="w3-col w3-padding-small">
+                        <input type="radio" name="radio-periodos" id="radio-periodos">
+                        <label for="radio-periodos">Período personalizado:</label>
+                    </div>
+                    <div class="w3-col">
+                        <div class="w3-col w3-padding-small">
+                            <label for="date-periodo-inicial" class="w3-col s2">&nbspDe:</label>
+                            <input type="date" id="date-periodo-inicial" name="date-periodos" class="w3-col s10 w3-padding-small w3-round-large w3-border-0">
+                        </div>
+                        <div class="w3-col w3-padding-small">
+                            <label for="date-periodo-final" class="w3-col s2">Até:</label>
+                            <input type="date" id="date-periodo-final" name="date-periodos" class="w3-col s10 w3-padding-small w3-round-large w3-border-0">
+                        </div>
+                        <div class="w3-col w3-padding-small">
+                            <button type="button" id="btn-filtrar-periodo-2" class="w3-col w3-btn w3-ripple w3-white w3-round-large">Filtrar Período</button>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+            <!-- JANELA: ADICIONAR REGISTROS -->
+            <form id="form-adicionar-registro" class="janelas w3-display-middle w3-col s10">
+                <fieldset class="w3-card-4 w3-green w3-round-large">
+                    <legend class="w3-green w3-padding-small w3-round-large">
+                        <b class="w3-cell w3-cell-middle w3-padding-small">Criar registro</b>
+                        <button id="btn-fechar-criar-registros" type="button" class="w3-border-0 w3-transparent w3-padding-small">
+                            <box-icon class="w3-cell box-icon-x-circle" name='x-circle' type='solid' color='#F08080' ></box-icon>
+                        </button>
+                    </legend>
+                    <div class="w3-container">
+                        <input class="w3-col w3-center w3-border-0 w3-round-large w3-padding w3-margin-bottom" name="refeicao-nome" type="text" placeholder="Nome da refeição">
+                    </div>
+                    <div class="w3-container">
+                        <input class="w3-col w3-center w3-border-0 w3-round-large w3-padding w3-margin-bottom" name="refeicao-data" type="datetime-local">
+                    </div>
+                    <div id="container-itens-registro" class="w3-container w3-padding w3-white w3-round-large">
+                        <!-- <div class="w3-panel w3-padding-small w3-pale-green w3-round-large">
+                            <div class="w3-col w3-padding-small">
+                                <div class="w3-col s7">
+                                    <b class="w3-small">Pão Francês</b>
+                                </div>
+                                <div class="w3-col w3-right-align s5">
+                                    <button type="button" class="w3-border-0 w3-padding-small w3-round-large w3-pale-red">
+                                        <box-icon class="w3-cell-top" name='trash' type='solid' size="xs"></box-icon>
+                                        <b class="w3-tiny w3-cell-middle">Remover</b>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="w3-col w3-center w3-padding-small">
+                                <div class="w3-col w3-tiny">
+                                    <div class="w3-show-inline-block w3-padding-small w3-margin-5 w3-round-large w3-pale-red">
+                                        <b>Consumo (g):</b>
+                                        <input step="0.1" type="number" min="0.1" value="0.01" style="width: 70px;">
+                                    </div>
+                                </div>
+                                <div class="w3-col w3-tiny">
+                                    <div class="w3-show-inline-block w3-margin-5">
+                                        <b>Porção padrão: </b>
+                                        <span>(dados)</span>
+                                    </div> 
+                                    <div class="w3-show-inline-block w3-margin-5">
+                                        <b>Kcal consumida: </b>
+                                        <span>(dados)</span>
+                                    </div>
+                                    <div class="w3-show-inline-block w3-margin-5">
+                                        <b>Kcal p/ porção: </b>
+                                        <span>(dados)</span>
+                                    </div>
+                                    <div class="w3-show-inline-block w3-margin-5">
+                                        <b>Embalagem: </b>
+                                        <span>(dados)</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> -->
+                    </div>
+                    <div class="w3-col">
+                        <div class="w3-col w3-center w3-padding w3-margin-top w3-margin-bottom w3-round-large" style="background-color: lightsalmon;">
+                            <box-icon class="w3-cell w3-cell-middle w3-small" type='solid' name='hot'></box-icon>
+                            <b id="refeicao-total-kcal" class="w3-cell w3-cell-middle w3-small">Total em Kcal:&nbsp</b>
+                            <b id="criar-registro-total-kcal" class="w3-cell w3-cell-middle w3-small">0</b>
+                        </div>
+                        <div class="w3-col w3-center w3-padding-small">
+                            <button type="button" id="btn-add-item" class="w3-btn w3-ripple w3-white w3-round-large">
+                                <b class="w3-cell w3-tiny w3-cell-middle w3-padding-small">Adicionar item</b>
+                                <box-icon name="plus-circle" type="solid" size="sm" color="palegreen" class="w3-cell w3-cell-middle"></box-icon>
+                            </button>
+                        </div>
+                        <div class="w3-col w3-center w3-padding-small">
+                            <button type="button" id="btn-salvar-registro" class="w3-btn w3-ripple w3-white w3-round-large">
+                                <b class="w3-cell w3-tiny w3-cell-middle w3-padding-small">Salvar registro</b>
+                                <box-icon name="save" type="solid" size="sm" color="palegreen" class="w3-cell w3-cell-middle"></box-icon>
+                            </button>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+            <!-- JANELA: ADICIONAR ITEM -->
+            <form id="form-adicionar-item" class="janelas w3-display-middle w3-col s10 m7">
+                <fieldset class="w3-card-4 w3-green w3-round-large">
+                    <legend class="w3-green w3-padding-small w3-round-large">
+                        <b class="w3-cell w3-cell-middle w3-padding-small">Adicionar item</b>
+                        <button id="btn-fechar-add-edt-item" type="button" class="w3-border-0 w3-transparent w3-padding-small">
+                            <box-icon class="w3-cell box-icon-x-circle" name='x-circle' type='solid' color='#F08080' ></box-icon>
+                        </button>
+                    </legend>
+                    <div id="frm-pesq-cod-barras" class="w3-col frm-section">
+                        <label for="inp-pesq-cod-barras" class="w3-padding-small"><b>Pesquisa por cód. barras</b></label>
+                        <div class="w3-col w3-padding-small">
+                            <input id="inp-pesq-cod-barras" class="w3-border-0 w3-round-large w3-padding-small" type="text" placeholder="Digite o código de barras">
+                            <button id="btn-pesq-cod-barras" type="button" class="w3-border-0 w3-round-large w3-padding-small">
+                                <box-icon class="w3-cell-middle" type='solid' name='barcode'></box-icon>
+                            </button>
+                        </div>
+                    </div>
+                    <div id="frm-pesq-produto" class="w3-col frm-section">    
+                        <b class="w3-padding-small">Pesquisa por nome e marca</b>
+                        <div class="w3-col w3-padding-small">
+                            <label for="inp-nome-produto">Nome:</label>
+                            <input id="inp-nome-produto" class="w3-border-0 w3-round-large w3-padding-small" type="text" name="radio-periodos">
+                        </div>
+                        <div class="w3-col w3-padding-small">
+                            <label for="inp-marca-produto">Marca:</label>
+                            <input id="inp-marca-produto" class="w3-border-0 w3-round-large w3-padding-small" type="text" name="radio-periodos">
+                        </div>
+                        <div class="w3-col w3-padding-small">
+                            <button id="btn-pesq-produto" type="button" class="w3-col w3-border-0 w3-round-large w3-padding-small">
+                                <box-icon class="w3-cell-middle" name='search-alt-2'></box-icon>
+                                <b class="w3-small">Pesquisar</b>
+                            </button>
+                        </div>
+                    </div>
+                    <div id="div-produtos" class="w3-col frm-section w3-padding w3-white">
+                            
+                    </div>
+                </fieldset>
+            </form>
+        </main>
+        <button id="btn-add-registro" type="button" class="w3-panel w3-border-0 w3-transparent">
+            <b class="w3-tiny w3-cell w3-cell-middle w3-padding-small w3-round-large w3-pale-green">Adicionar registro</b>
+            <box-icon name="plus-circle" type="solid" size="lg" color="palegreen" class="w3-cell"></box-icon>
+        </button>
+    </div>
+    <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+    <script type="module" src="script/Main.js"></script>
+    <script type="module" src="script/AdicionarItem.js"></script>
+    <script type="module" src="script/UltimosRegistros.js"></script>
+    <script type="module" src="script/PesquisarRegistros.js"></script>
+    <script type="module" src="script/SalvarRegistro.js"></script>
+</body>
+</html>

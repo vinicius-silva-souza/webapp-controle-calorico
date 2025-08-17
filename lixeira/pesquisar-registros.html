@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../view/style/w3.css">
+    <link rel="stylesheet" href="../view/style/normalize.css">
+    <link rel="stylesheet" href="../view/style/main.css">
+    <title>Calendário</title>
+</head>
+<body>
+    <main>
+        <form class="w3-display-middle w3-col s10 m3">
+            <fieldset class="w3-card-4 w3-green w3-round-large">
+                <legend class="w3-green w3-padding-small w3-round-large">
+                    <b class="w3-cell w3-cell-middle w3-padding-small">PESQUISAR REGISTROS</b>
+                    <button id="btn-fechar-registros" type="button" class="w3-border-0 w3-transparent w3-padding-small">
+                        <box-icon class="w3-cell box-icon-x-circle" name='x-circle' type='solid' color='#F08080' ></box-icon>
+                    </button>
+                </legend>
+                <div class="w3-col">
+                    <div class="w3-col w3-padding-small">
+                        <label for="date-periodo-inicial" class="w3-col s2">&nbspDe:</label>
+                        <input type="date" id="date-periodo-inicial" name="date-periodos" class="w3-col s10 w3-padding-small w3-round-large w3-border-0">
+                    </div>
+                    <div class="w3-col w3-padding-small">
+                        <label for="date-periodo-final" class="w3-col s2">Até:</label>
+                        <input type="date" id="date-periodo-final" name="date-periodos" class="w3-col s10 w3-padding-small w3-round-large w3-border-0">
+                    </div>
+                    <div class="w3-col w3-padding-small">
+                        <button type="button" id="btn-filtrar-periodo-1" class="w3-col w3-btn w3-ripple w3-white w3-round-large">Filtrar Período</button>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </main>
+    <script src="https://unpkg.com/boxicons@2.1.3/dist/boxicons.js"></script>
+</body>
+</html>

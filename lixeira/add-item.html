@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../view/style/main.css">
+    <link rel="stylesheet" href="../view/style/w3.css">
+    <link rel="stylesheet" href="../view/style/normalize.css">
+    <title>Add Item</title>
+</head>
+<body>
+    <form class="w3-display-middle w3-col s10 m7">
+        <fieldset class="w3-card-4 w3-green w3-round-large">
+            <legend class="w3-green w3-padding-small w3-round-large">
+                <b class="w3-cell w3-cell-middle w3-padding-small">Adicionar item</b>
+                <button id="btn-fechar-add-edt-item" type="button" class="w3-border-0 w3-transparent w3-padding-small">
+                    <box-icon class="w3-cell box-icon-x-circle" name='x-circle' type='solid' color='#F08080' ></box-icon>
+                </button>
+            </legend>
+            <div id="frm-pesq-cod-barras" class="w3-col frm-section">
+                <label for="inp-pesq-cod-barras" class="w3-padding-small"><b>Pesquisa por cód. barras</b></label>
+                <div class="w3-col w3-padding-small">
+                    <input id="inp-pesq-cod-barras" class="w3-border-0 w3-round-large w3-padding-small" type="text" placeholder="Digite o código de barras">
+                    <button id="btn-pesq-cod-barras" type="button" class="w3-border-0 w3-round-large w3-padding-small">
+                        <box-icon class="w3-cell-middle" type='solid' name='barcode'></box-icon>
+                    </button>
+                </div>
+            </div>
+            <div id="frm-pesq-produto" class="w3-col frm-section">    
+                <b class="w3-padding-small">Pesquisa por nome e marca</b>
+                <div class="w3-col w3-padding-small">
+                    <label for="inp-nome-produto">Nome:</label>
+                    <input id="inp-nome-produto" class="w3-border-0 w3-round-large w3-padding-small" type="text" name="radio-periodos">
+                </div>
+                <div class="w3-col w3-padding-small">
+                    <label for="inp-marca-produto">Marca:</label>
+                    <input id="inp-marca-produto" class="w3-border-0 w3-round-large w3-padding-small" type="text" name="radio-periodos">
+                </div>
+                <div class="w3-col w3-padding-small">
+                    <button id="btn-pesq-produto" type="button" class="w3-col w3-border-0 w3-round-large w3-padding-small">
+                        <box-icon class="w3-cell-middle" name='search-alt-2'></box-icon>
+                        <b class="w3-small">Pesquisar</b>
+                    </button>
+                </div>
+            </div>
+            <div id="div-produtos" class="w3-col frm-section w3-padding w3-white">
+                    
+            </div>
+        </fieldset>
+    </form>
+    <script src="https://unpkg.com/boxicons@2.1.3/dist/boxicons.js"></script>
+    <script src="../view/script/add-edt-item.js"></script>
+</body>
+</html>

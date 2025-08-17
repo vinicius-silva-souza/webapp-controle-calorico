@@ -1,0 +1,24 @@
+
+API openfoodfacts
+
+https://wiki.openfoodfacts.org/API/Read/Search
+https://openfoodfacts.github.io/openfoodfacts-server/api/ref-v2/
+
+FETCH API
+
+https://developer.mozilla.org/pt-BR/docs/Learn_web_development/Extensions/Async_JS
+https://developer.mozilla.org/pt-BR/docs/Learn_web_development/Extensions/Async_JS/Promises
+https://developer.mozilla.org/pt-BR/docs/conflicting/Learn/JavaScript/Asynchronous/Promises
+https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest_API
+https://developer.mozilla.org/pt-BR/docs/Web/API/Fetch_API
+
+JavaScript
+
+https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Operators/this
+https://developer.mozilla.org/en-US/docs/Web/API/RequestInit#examples
+https://developer.mozilla.org/pt-BR/docs/Web/HTTP/Reference/Headers#cors
+https://developer.mozilla.org/pt-BR/docs/Web/HTTP/Reference/Headers/Cache-Control
+
+CSS
+
+https://www.w3schools.com/css/css_attribute_selectors.asp

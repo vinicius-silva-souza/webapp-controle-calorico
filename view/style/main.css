@@ -1,0 +1,101 @@
+* {user-select: none;}
+button, a {cursor: pointer;}
+
+#btn-add-registro {position: fixed; bottom: 0; right: 0;}
+#container-itens-registro {height: 210px; overflow-y: auto;}
+
+.box-icon-x-circle{background-color: white; border-radius: 100%;}
+.btn-grp-header {border: 2px solid lightgreen;}
+
+.frm-section{
+    border: 2px solid lightgray;
+    border-radius: 5px;
+    padding: 5px 10px;
+    margin-bottom: 8px;
+}
+
+#div-produtos {
+    height: 232px; overflow-y: auto;
+}
+
+.janelas {
+    display: none; 
+    z-index: 1;
+}
+
+.container-refeicoes {
+    height: 236px;
+    overflow-y: auto;
+}
+
+.card-refeicoes {
+    background-color: whitesmoke;
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 10px;
+    border: 2px solid palegreen;
+}
+
+.card-refeicoes-conteudo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card-refeicoes-titulo {
+    background-color: palegreen;
+    padding: 0 20px;
+    border-radius: 10px;
+    font-weight: 500;
+}
+
+.card-refeicoes-alimentos {
+    width: 66.67%;
+}
+
+.card-refeicoes-icone-container {
+    width: 33.33%;
+}
+
+.card-refeicoes-icone {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.card-refeicoes-btn-container {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    padding-top: 10px;
+}
+
+.card-refeicoes-btn {
+    border-radius: 5px;
+    border: 2px solid;
+}
+
+.btn-atualizar-remover {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.btn-atualizar-remover > button {margin: 0 5px;}
+
+.feedback {
+    padding: 5px 0px;
+    position: fixed;
+    top: 0;
+    background-color: gray;
+    color: black;
+    z-index: 999;
+    width: 100%;
+    text-align: center;
+}
+
+#container-titulo-funcao {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
