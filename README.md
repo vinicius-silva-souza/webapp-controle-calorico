@@ -41,12 +41,12 @@ A proposta é ser uma solução **prática, intuitiva e acessível**, que auxili
 
 ## Tecnologias Utilizadas
 - **Frontend**:
-- Framework HTML: W3.CSS (https://www.w3schools.com/w3css/)
--  Biblioteca de gráficos: Chart.JS (https://www.chartjs.org).
+    - Framework HTML: W3.CSS (https://www.w3schools.com/w3css/)
+    -  Biblioteca de gráficos: Chart.JS (https://www.chartjs.org).
 - **Backend**:
-- Node.JS + Hapi.JS (https://hapi.dev)
-- **Banco de Dados**: Banco de dados: SQLite (https://www.npmjs.com/package/sqlite3) 
-- **APIs**: API de Terceiros: OpenFoodFacts (https://openfoodfacts.github.io/openfoodfacts-server/api/) 
+    - Node.JS + Hapi.JS (https://hapi.dev)
+    - **Banco de Dados**: Banco de dados: SQLite (https://www.npmjs.com/package/sqlite3) 
+- **API de terceiros**: OpenFoodFacts (https://openfoodfacts.github.io/openfoodfacts-server/api/) 
 - **Design**: UI/UX focada em simplicidade e acessibilidade
   
 ---
