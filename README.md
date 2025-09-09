@@ -1,5 +1,25 @@
 # Equilibra - WebApp de Controle Calórico
 
+## Índice
+
+- [Descrição](#descrição)
+- [Funcionalidades](#funcionalidades)
+- [Tecnologias Utilizadas](#tecnologias-utilizadas)
+- [Objetivos](#objetivos)
+- [Personas](#personas)
+    - [Marco Ribeiro](#marcos-ribeiro)
+    - [Dra. Fernanda Lopes](#dra-fernanda-lopes)
+    - [Dr. André Teixeira](#dr-andré-teixeira)
+- [Jornada do usuário](#jornada-do-usuário)
+- [Protótipo/Telas](#protótipotelas)
+- [Vídeos](#vídeos)
+- [GIFs de funcionalidades](#gifs-de-funcionalidades)
+    - [Registro](#registro)
+    - [Visualização](#visualização)
+    - [Edição](#edição)
+- [Instalação](#instalação)
+    - [Passos](#passos)
+
 ## Descrição
 O **Equilibra** é um aplicativo multiplataforma (Android, iOS e Web) desenvolvido para auxiliar no **controle da ingestão calórica e nutricional**.  
 Ele ajuda pessoas a **monitorar seus hábitos alimentares**, com foco especial em quem convive com **obesidade, diabetes, hipertensão** e outras condições relacionadas à saúde alimentar e metabólica.  
@@ -29,7 +49,6 @@ A proposta é ser uma solução **prática, intuitiva e acessível**, que auxili
 - **APIs**: API de Terceiros: OpenFoodFacts (https://openfoodfacts.github.io/openfoodfacts-server/api/) 
 - **Design**: UI/UX focada em simplicidade e acessibilidade
   
-
 ---
 
 ## Objetivos
@@ -65,20 +84,17 @@ A proposta é ser uma solução **prática, intuitiva e acessível**, que auxili
 
 ---
 
-##  Protótipo / Telas
+##  Protótipo/Telas
+
 - Tela de Início
     - ![Primeira Imagem](assets/frontend1.png)
 - Navegação pelo app
     - ![Segunda Imagem](assets/frontend2.png)
 
+## Vídeos
 
-## Vídeo
-
-Aqui está o vídeo de demonstração (menos de 1 minuto):
-
-https://drive.google.com/file/d/1GJvP2v64705Y-kKxQlKIJ3N6NT3A3Hc2/view?usp=drive_link
-
-Além disso um vídeo com demonstração de gráficos e relátorios.(https://drive.google.com/file/d/18H0Sqk6EvCG0QSJKlOIqmOAxV_BBDqpa/view?usp=drive_link)
+- [Vídeo de demonstração (menos de 1 minuto)](https://drive.google.com/file/d/1GJvP2v64705Y-kKxQlKIJ3N6NT3A3Hc2/view?usp=drive_link)
+- [Demonstração de gráficos e relátorios](https://drive.google.com/file/d/18H0Sqk6EvCG0QSJKlOIqmOAxV_BBDqpa/view?usp=drive_link)
 
 ## GIFs de funcionalidades
 
@@ -110,3 +126,23 @@ Além disso um vídeo com demonstração de gráficos e relátorios.(https://dri
 ![Excluir Registro Conferência](g15_excluir_registro_conferência.gif)
 ![Pesquisar Registro](g16_pesquisar_registro.gif)
 
+## Instalação
+
+Para executar o projeto serão necessários:
+
+- [Node.JS](https://nodejs.org/pt/download)
+- Servidor Web (preferencialmente [WampServer](https://wampserver.aviatechno.net) ou [XAMPP](https://www.apachefriends.org/pt_br/download.html))
+- [Git](https://git-scm.com/downloads)
+
+### Passos
+
+1. Clonar repositório:
+
+Abra o prompt de comando no diretório `www` (para WampServer) ou `htdocs` (para XAMPP). Em seguida execute o seguinte comando: `git clone https://github.com/vinicius-silva-souza/webapp-controle-calorico.git`
+
+2. Inicie API (rotas HTTP)
+    - Navegue até o diretório clonado: `cd webapp-controle-calorico`
+    - Inicie a API: `node ./api/rotasApi.js`
+
+3. Inicie o servidor Wamp/XAMPP
+4. No navegador, acesse o endereço do servidor local e navegue até o diretório `/view/main.html`

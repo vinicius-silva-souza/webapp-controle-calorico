@@ -5,9 +5,7 @@ app = Flask(__name__)
 
 # Conexão ao banco de dados
 def conectar_bd():
-    return sqlite3.connect("meu_banco.db")
-
-
+    return sqlite3.connect("sqlite_database.db")
 
 # Criar um usuário (POST)
 @app.route("/usuario", methods=["POST"])
@@ -64,8 +62,6 @@ def listar_usuario_ficha(Login):
     response = Response(json_string,content_type="application/json; charset=utf-8" )
     return response
 
-
-
 # Criar um alimento (POST)
 @app.route("/alimento", methods=["POST"])
 def criar_alimento():
@@ -108,8 +104,6 @@ def listar_alimento_ficha(Nome_Alimento):
     response = Response(json_string,content_type="application/json; charset=utf-8" )
     return response
 
-
-
 # Criar uma refeição (POST)
 @app.route("/refeicao", methods=["POST"])
 def criar_refeicao():
@@ -126,15 +120,57 @@ def criar_refeicao():
     finally:
         conn.close()
 
-# 📌 4. Listar refeições de um usuário (GET)
-@app.route("/refeicoes/<int:usuario_id>", methods=["GET"])
+# 📌 4. Listar alimentos de uma refeicao do usuario (GET)
+@app.route("/alimentos/usuario/<int:usuario_id>/refeicao/<int:refeicao_id>", methods=["GET"])
+def listar_alimentos_refeicao(usuario_id, refeicao_id):
+    conn = conectar_bd()
+    cursor = conn.cursor()
+    cursor.execute(
+        "SELECT" + " " 
+            + "TBL_Alimento.Nome_Alimento,"
+            + "TBL_Alimento.Consumo,"
+            + "TBL_Alimento.Porcoes_Consumidas,"
+            + "TBL_Alimento.Porcao_Padrao,"
+            + "TBL_Alimento.Kcal_Consumidas,"
+            + "TBL_Alimento.Kcal_Por_Porcao,"
+            + "TBL_Alimento.Qtd_Embalagam" + " " + 
+        "FROM TBL_Alimento" + " "
+            + "INNER JOIN TBL_Refeicao ON TBL_Alimento.Cod_Refeicao = TBL_Refeicao.Cod_Refeicao" + " "
+            + "INNER JOIN TBL_Usuario ON TBL_Usuario.Cod_Usuario = TBL_Refeicao.Cod_Usuario" + " "
+        "WHERE" + " " 
+            + "TBL_Usuario.Cod_Usuario = ? AND" + " "
+            + "TBL_Refeicao.Refeicao_Inativa = 0 AND" + " "
+            + "TBL_Refeicao.Cod_Refeicao = ?", 
+        (usuario_id, refeicao_id)
+    )
+    alimentos = cursor.fetchall()
+    conn.close()
+    return alimentos
+
+# 📌 5. Listar ultimas 5 refeicoes do usuario (GET) 
+@app.route("/refeicao/usuario/<int:usuario_id>", methods=["GET"])
 def listar_refeicoes(usuario_id):
     conn = conectar_bd()
     cursor = conn.cursor()
-    cursor.execute("SELECT id, descricao, data FROM Refeicao WHERE usuario_id = ?", (usuario_id,))
-    refeicoes = [{"id": row[0], "descricao": row[1], "data": row[2]} for row in cursor.fetchall()]
+    cursor.execute(
+        "SELECT" + " "
+            + "TBL_Refeicao.Cod_Refeicao," 
+            + "TBL_Refeicao.Nome_Refeicao,"
+            + "TBL_Refeicao.Data_Refeicao,"
+            + "TBL_Refeicao.Hora,"
+            + "TBL_Refeicao.Total_kcal,"
+            + "TBL_Refeicao.Qtd_Alimentos,"
+            + "TBL_Refeicao.Alimentos_Na_Refeicao" + " " +
+        "FROM TBL_Refeicao" + " " +
+        "WHERE" + " "
+            + "TBL_Refeicao.Cod_Usuario = ? AND" + " "
+            + "TBL_Refeicao.Refeicao_Inativa = 0" + " " +
+        "ORDER BY TBL_Refeicao.Data_Refeicao DESC LIMIT 5", 
+        (usuario_id,)
+    )
+    refeicoes = cursor.fetchall()
     conn.close()
-    return jsonify(refeicoes)
+    return refeicoes
 
 if __name__ == "__main__":
     app.run(debug=True)
