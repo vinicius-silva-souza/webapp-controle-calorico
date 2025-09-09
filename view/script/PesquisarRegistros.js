@@ -62,4 +62,3 @@ btnFiltrarPeriodos.addEventListener("click", function(){
         }
     }
 })
-

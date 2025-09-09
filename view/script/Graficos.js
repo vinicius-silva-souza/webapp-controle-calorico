@@ -366,4 +366,3 @@ function ocultarGrafico(){
 }
 
 export {grafico, ocultarGrafico}
-

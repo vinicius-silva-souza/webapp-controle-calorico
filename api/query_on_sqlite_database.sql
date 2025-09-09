@@ -252,4 +252,4 @@ SELECT Data_Refeicao, count(Data_Refeicao) AS "Num_Refeicoes", sum(Total_kcal) A
 FROM TBL_Refeicao
 WHERE Data_Refeicao BETWEEN date('2025-01-01') AND date('2025-12-31')
 GROUP BY Data_Refeicao
-ORDER BY Hora ASC
+ORDER BY Hora ASC 

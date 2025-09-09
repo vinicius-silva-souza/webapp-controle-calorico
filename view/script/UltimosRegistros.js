@@ -84,4 +84,3 @@ btnUltimosRegistros.addEventListener('click', function(){
         });
     });
 });
-

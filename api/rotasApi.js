@@ -940,5 +940,5 @@ async function iniciaServidor(){
     console.log('Server started at: ' + server.info.uri);
 }
 
-iniciaServidor();
+iniciaServidor(); 
 
