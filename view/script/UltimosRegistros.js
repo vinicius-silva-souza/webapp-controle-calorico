@@ -1,3 +1,4 @@
+import { ocultarGrafico } from "./Graficos";
 import { request, cardRefeicoes, associarEventos, visualizarRefeicao, inativarRefeicao, feedback } from "./Main";
 
 let containerRefeicoes = document.querySelector(".container-refeicoes");
@@ -43,6 +44,7 @@ window.addEventListener('load', function(){
 });
 
 btnUltimosRegistros.addEventListener('click', function(){
+    ocultarGrafico();
     let elTituloFuncao = document.getElementById("titulo-funcao");
     let icone = document.getElementById("titulo-funcao-icone");
     elTituloFuncao.innerText = 'Registros de hoje';

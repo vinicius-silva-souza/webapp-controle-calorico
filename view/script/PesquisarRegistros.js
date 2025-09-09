@@ -1,12 +1,14 @@
 
 import { request, cardRefeicoes, associarEventos, visualizarRefeicao, inativarRefeicao, feedback } from "./Main";
+import { ocultarGrafico } from "./Graficos";
 
 let containerRefeicoes = document.querySelector(".container-refeicoes");
-let btnFiltrarPeriodos = document.getElementById("btn-filtrar-periodo-1");
+let btnFiltrarPeriodos = document.getElementById("btn-filtrar-periodo");
 let inpDataInicial = document.getElementById("date-periodo-inicial");
 let inpDataFinal = document.getElementById("date-periodo-final");
 
 btnFiltrarPeriodos.addEventListener("click", function(){
+    ocultarGrafico();
     let elTituloFuncao = document.getElementById("titulo-funcao");
     let icone = document.getElementById("titulo-funcao-icone");
     elTituloFuncao.innerText = 'Registros encontrados';

@@ -14,18 +14,8 @@
 <body>
     <div class="w3-container">
         <header class="w3-row">
-            <div class="w3-container">
-                <div class="w3-col s3 w3-padding-small">
-                    <div>
-                        <box-icon name='user-circle' size="lg"></box-icon>
-                    </div>
-                </div>
-                <div class="w3-col s8">
-                    <p>Username</p>
-                </div>
-            </div>
             <hr style="border-top: 2px solid #000; margin: 10px 0;"/>
-            <nav class="w3-center">
+            <nav class="w3-row w3-center">
                 <div class="w3-col s3 w3-padding-small">
                     <button id="btn-ultimos-registros"  type="button" class="btn-grp-header w3-white w3-circle w3-padding-small">
                         <box-icon name="history" size="md"></box-icon>
@@ -59,30 +49,14 @@
         </h1>
         <hr style="border-top: 2px solid #000; margin: 10px 0;"/>
         <main>
+            <div id="graficos-container">
+               <!--  <canvas id="graficos"></canvas> (PREENCHIDO DINAMICAMENTE COM JS) -->
+            </div>
             <div class="container-refeicoes">
-                <!-- ULTIMOS REGISTROS -->
-                <div class="card-refeicoes">
-                    <div class="card-refeicoes-conteudo">
-                        <h3 class="card-refeicoes-titulo">Café da manhã</h3>
-                        <div class="card-refeicoes-icone">
-                            <box-icon class="w3-cell w3-cell-middle w3-small" type="regular" name="time" size="sm"></box-icon>
-                            <b>09h30m</b>
-                        </div>
-                    </div>
-                    <div class="card-refeicoes-conteudo">
-                        <details class="card-refeicoes-alimentos">
-                            <summary>Alimentos (4)</summary>
-                            <small>> Coca-Cola > Pão integral > Banana > Laranja</small>
-                        </details>
-                        <div class="card-refeicoes-icone">
-                            <box-icon class="w3-cell w3-cell-middle w3-small" type="solid" name="hot" size="sm"></box-icon>
-                            <b>X kcal</b>
-                        </div>
-                    </div>
-                </div>
+                <!-- ULTIMOS REGISTROS (PREENCHIDO DINAMICAMENTE COM JS)-->
             </div>
             <!-- JANELA: PESQUISAR REGISTROS -->
-            <form id="form-pesquisar-registros" class="janelas w3-display-middle w3-col s10 m3">
+            <form id="form-pesquisar-registros" class="janelas w3-display-middle">
                 <fieldset class="w3-card-4 w3-green w3-round-large">
                     <legend class="w3-green w3-padding-small w3-round-large">
                         <b class="w3-cell w3-cell-middle w3-padding-small">PESQUISAR REGISTROS</b>
@@ -100,13 +74,13 @@
                             <input type="date" id="date-periodo-final" name="date-periodos" class="w3-col s10 w3-padding-small w3-round-large w3-border-0" required>
                         </div>
                         <div class="w3-col w3-padding-small">
-                            <button type="button" id="btn-filtrar-periodo-1" class="w3-col w3-btn w3-ripple w3-white w3-round-large">Filtrar Período</button>
+                            <button type="button" id="btn-filtrar-periodo" class="w3-col w3-btn w3-ripple w3-white w3-round-large">Filtrar Período</button>
                         </div>
                     </div>
                 </fieldset>
             </form>
             <!-- JANELA: VER RELATÓRIOS -->
-            <form id="form-ver-relatorios" class="janelas w3-display-middle w3-col s10 m3">
+            <form id="form-ver-relatorios" class="janelas w3-display-middle">
                 <fieldset class="w3-card-4 w3-green w3-round-large">
                     <legend class="w3-green w3-padding-small w3-round-large">
                         <b class="w3-cell w3-cell-middle w3-padding-small">VISUALIZAR RELATÓRIOS</b>
@@ -115,42 +89,66 @@
                         </button>
                     </legend>
                     <div class="w3-col w3-padding-small">
-                        <input type="radio" name="radio-periodos" id="radio-7-dias">
-                        <label for="radio-7-dias">Últimos 7 dias</label>
+                        <input id="radio-semanal" type="radio" name="radio-periodos" value="Semanal" checked>
+                        <label for="inp-date-semanal">Semanal: </label>
+                        <input type="date" name="inp-date-semanal" id="inp-date-semanal">
                     </div>
                     <div class="w3-col w3-padding-small">
-                        <input type="radio" name="radio-periodos" id="radio-15-dias">
-                        <label for="radio-15-dias">Últimos 15 dias</label>
+                        <input id="radio-mensal" type="radio" name="radio-periodos" value="Mensal">
+                        <label for="select-meses">Mensal: </label>
+                        <select id="select-meses" name="select-meses">
+                            <option id="Janeiro" value="01">Janeiro</option>
+                            <option id="Fevereiro" value="02">Fevereiro</option>
+                            <option id="Marco" value="03">Março</option>
+                            <option id="Abril" value="04">Abril</option>
+                            <option id="Maio" value="05">Maio</option>
+                            <option id="Junho" value="06">Junho</option>
+                            <option id="Julho" value="07">Julho</option>
+                            <option id="Agosto" value="08">Agosto</option>
+                            <option id="Setembro" value="09">Setembro</option>
+                            <option id="Outubro" value="10">Outubro</option>
+                            <option id="Novembro" value="11">Novembro</option>
+                            <option id="Dezembro" value="12">Dezembro</option>
+                        </select>
+                        <label for="inp-ano-1"> de </label>
+                        <input type="number" min="2025" max="2125" value="2025" id="inp-ano-1" value="Anual">
                     </div>
                     <div class="w3-col w3-padding-small">
-                        <input type="radio" name="radio-periodos" id="radio-30-dias">
-                        <label for="radio-30-dias">Últimos 30 dias</label>
+                        <input id="radio-anual" type="radio" name="radio-periodos" value="Anual">
+                        <label for="inp-ano-2">Anual: </label>
+                        <input type="number" min="2024" max="2125" value="2025" name="" id="inp-ano-2">
                     </div>
-                    <div class="w3-col w3-padding-small">
-                        <input type="radio" name="radio-periodos" id="radio-mes">
-                        <label for="radio-mes">Este mês</label>
+                    <div class="w3-col w3-padding-small" style="display: flex; flex-direction: row; justify-content: flex-start; align-items: center;">
+                        <box-icon name='bar-chart-alt' size="md" color="white"></box-icon>
+                        <div>
+                            <label for="select-opcoes-graficos">Gráfico: </label>
+                            <select id="select-opcoes-graficos" name="select-opcoes-graficos">
+                                <option value="Coluna'">Coluna</option>
+                                <option value="Barra">Barra</option>
+                                <option value="Pizza">Pizza</option>
+                                <option value="Rosca">Rosca</option>
+                                <option value="Linha">Linha</option>
+                            </select>
+                        </div>
                     </div>
-                    <div class="w3-col w3-padding-small">
-                        <input type="radio" name="radio-periodos" id="radio-periodos">
-                        <label for="radio-periodos">Período personalizado:</label>
+                    <div class="w3-col w3-padding-small" style="display: flex; align-items: center;">
+                        <box-icon class="w3-col s1" type='regular' name='menu' color="white" size="md"></box-icon>
+                        <select id="select-opcoes-relatorios" class="w3-col s11" name="select-opcoes-relatorios">
+                            <option value="1">(1) Consumo calórico por data</option>
+                            <option value="2">(2) Refeições com maior quantidade de caloria (agrupado por data)</option>
+                            <option value="3">(3) Refeições com menor quantidade de caloria (agrupado por data)</option>
+                            <option value="4">(4) Evolução calórica (Anual)</option>
+                        </select>
                     </div>
                     <div class="w3-col">
                         <div class="w3-col w3-padding-small">
-                            <label for="date-periodo-inicial" class="w3-col s2">&nbspDe:</label>
-                            <input type="date" id="date-periodo-inicial" name="date-periodos" class="w3-col s10 w3-padding-small w3-round-large w3-border-0">
-                        </div>
-                        <div class="w3-col w3-padding-small">
-                            <label for="date-periodo-final" class="w3-col s2">Até:</label>
-                            <input type="date" id="date-periodo-final" name="date-periodos" class="w3-col s10 w3-padding-small w3-round-large w3-border-0">
-                        </div>
-                        <div class="w3-col w3-padding-small">
-                            <button type="button" id="btn-filtrar-periodo-2" class="w3-col w3-btn w3-ripple w3-white w3-round-large">Filtrar Período</button>
+                            <button type="button" id="btn-gerar-relatorios" class="w3-col w3-btn w3-ripple w3-white w3-round-large">Gerar relatórios</button>
                         </div>
                     </div>
                 </fieldset>
             </form>
             <!-- JANELA: ADICIONAR REGISTROS -->
-            <form id="form-adicionar-registro" class="janelas w3-display-middle w3-col s10">
+            <form id="form-adicionar-registro" class="janelas w3-display-middle w3-col s10 m8 l5">
                 <fieldset class="w3-card-4 w3-green w3-round-large">
                     <legend class="w3-green w3-padding-small w3-round-large">
                         <b class="w3-cell w3-cell-middle w3-padding-small">Criar registro</b>
@@ -165,45 +163,7 @@
                         <input class="w3-col w3-center w3-border-0 w3-round-large w3-padding w3-margin-bottom" name="refeicao-data" type="datetime-local">
                     </div>
                     <div id="container-itens-registro" class="w3-container w3-padding w3-white w3-round-large">
-                        <!-- <div class="w3-panel w3-padding-small w3-pale-green w3-round-large">
-                            <div class="w3-col w3-padding-small">
-                                <div class="w3-col s7">
-                                    <b class="w3-small">Pão Francês</b>
-                                </div>
-                                <div class="w3-col w3-right-align s5">
-                                    <button type="button" class="w3-border-0 w3-padding-small w3-round-large w3-pale-red">
-                                        <box-icon class="w3-cell-top" name='trash' type='solid' size="xs"></box-icon>
-                                        <b class="w3-tiny w3-cell-middle">Remover</b>
-                                    </button>
-                                </div>
-                            </div>
-                            <div class="w3-col w3-center w3-padding-small">
-                                <div class="w3-col w3-tiny">
-                                    <div class="w3-show-inline-block w3-padding-small w3-margin-5 w3-round-large w3-pale-red">
-                                        <b>Consumo (g):</b>
-                                        <input step="0.1" type="number" min="0.1" value="0.01" style="width: 70px;">
-                                    </div>
-                                </div>
-                                <div class="w3-col w3-tiny">
-                                    <div class="w3-show-inline-block w3-margin-5">
-                                        <b>Porção padrão: </b>
-                                        <span>(dados)</span>
-                                    </div> 
-                                    <div class="w3-show-inline-block w3-margin-5">
-                                        <b>Kcal consumida: </b>
-                                        <span>(dados)</span>
-                                    </div>
-                                    <div class="w3-show-inline-block w3-margin-5">
-                                        <b>Kcal p/ porção: </b>
-                                        <span>(dados)</span>
-                                    </div>
-                                    <div class="w3-show-inline-block w3-margin-5">
-                                        <b>Embalagem: </b>
-                                        <span>(dados)</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> -->
+                        <!--REGISTROS (PREENCHIDO DINAMICAMENTO COM JS) -->
                     </div>
                     <div class="w3-col">
                         <div class="w3-col w3-center w3-padding w3-margin-top w3-margin-bottom w3-round-large" style="background-color: lightsalmon;">
@@ -248,11 +208,11 @@
                         <b class="w3-padding-small">Pesquisa por nome e marca</b>
                         <div class="w3-col w3-padding-small">
                             <label for="inp-nome-produto">Nome:</label>
-                            <input id="inp-nome-produto" class="w3-border-0 w3-round-large w3-padding-small" type="text" name="radio-periodos">
+                            <input id="inp-nome-produto" class="w3-border-0 w3-round-large w3-padding-small" type="text">
                         </div>
                         <div class="w3-col w3-padding-small">
                             <label for="inp-marca-produto">Marca:</label>
-                            <input id="inp-marca-produto" class="w3-border-0 w3-round-large w3-padding-small" type="text" name="radio-periodos">
+                            <input id="inp-marca-produto" class="w3-border-0 w3-round-large w3-padding-small" type="text">
                         </div>
                         <div class="w3-col w3-padding-small">
                             <button id="btn-pesq-produto" type="button" class="w3-col w3-border-0 w3-round-large w3-padding-small">
@@ -272,11 +232,13 @@
             <box-icon name="plus-circle" type="solid" size="lg" color="palegreen" class="w3-cell"></box-icon>
         </button>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
     <script type="module" src="script/Main.js"></script>
     <script type="module" src="script/AdicionarItem.js"></script>
     <script type="module" src="script/UltimosRegistros.js"></script>
     <script type="module" src="script/PesquisarRegistros.js"></script>
     <script type="module" src="script/SalvarRegistro.js"></script>
+    <script type="module" src="script/Graficos.js"></script>
 </body>
 </html>

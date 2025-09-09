@@ -1,6 +1,18 @@
 * {user-select: none;}
 button, a {cursor: pointer;}
 
+#graficos-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#graficos {
+    max-width: 800px;
+    max-height: 400px;
+}
+#form-pesquisar-registros {width: 303px;}
+#form-adicionar-registro {min-width: 354px; max-width: 476px;}
+#form-ver-relatorios {width: 371px;}
 #btn-add-registro {position: fixed; bottom: 0; right: 0;}
 #container-itens-registro {height: 210px; overflow-y: auto;}
 
@@ -24,11 +36,17 @@ button, a {cursor: pointer;}
 }
 
 .container-refeicoes {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
     height: 236px;
     overflow-y: auto;
 }
 
 .card-refeicoes {
+    min-width: 380px;
+    max-width: 460px;
     background-color: whitesmoke;
     margin: 10px 0;
     padding: 10px;

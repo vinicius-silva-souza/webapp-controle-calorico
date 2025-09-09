@@ -1,4 +1,5 @@
-import { calculaCaloria, removerItem } from "./AdicionarItem";
+import { calculaCaloria} from "./AdicionarItem";
+import { grafico } from "./Graficos";
 
 let request = function(url, callback){
     fetch(url, {method: 'GET'})
@@ -45,7 +46,7 @@ function limparCriarRegistros(){
 function cardRefeicoes(codRefeicao, nomeRefeicao, data, hora, qtdAlimentos, alimentosNaRefeicao, totalKcal){
     let containerRefeicoes = document.querySelector(".container-refeicoes");
     containerRefeicoes.innerHTML +=
-    '<div class="card-refeicoes">'
+    '<div class="w3-col s12 m10 l6 card-refeicoes">'
         + '<div class="card-refeicoes-conteudo">'
             + `<h4 class="card-refeicoes-titulo">${nomeRefeicao}</h4>`
             + '<div class="card-refeicoes-icone-container">'
@@ -101,6 +102,80 @@ function desassociarEventos(cssSelector, evento){
         for (const elemento of collection) {
             elemento[evento] = null;
         }
+    }
+}
+
+function getDate(dateObj, what){
+    try {
+        let date = undefined;  
+        if(dateObj === null){
+            date = new Date();
+        } else if(dateObj instanceof Date){
+            date = dateObj;
+        } else {
+            throw new TypeError('O argumento fornecido ao parâmetro "dateObj" não é válido');
+        }
+
+        if(typeof what === "string"){
+            switch(what){
+                case "day":
+                    return date.getDate();
+                case "weekday":
+                    return date.getDay() + 1;
+                case "month":
+                    return date.getMonth() + 1;
+                case "year":
+                    return date.getFullYear();
+                case "date":
+                    return date.toLocaleDateString();
+                case "dateUS":
+                    let mes = date.getMonth() + 1;
+                    let dia = date.getDate();
+                    let ano = date.getFullYear();
+                    if(date.getMonth() < 10) mes = "0" + mes;
+                    if(date.getDate() < 10) dia = "0" + dia;
+                    return ano + "/" + mes + "/" + dia;
+                default:
+                  throw new TypeError(`O argumento ${what} não é válido para o parâmetro "what"`);
+            }
+        } else {
+            throw new TypeError('É necessário fornecer o tipo "string" ao parâmetro "what"');
+        }
+    } catch (err) {
+        console.error(err.name + ": " + err.message);
+    } 
+}
+
+function getMonthName(dateObj){
+    try {
+        let date = undefined; 
+        let month = undefined; 
+
+        if(dateObj === null){
+            date = new Date();
+        } else if(dateObj instanceof Date){
+            date = dateObj;
+        } else {
+            throw new TypeError('O argumento fornecido ao parâmetro "dateObj" não é válido');
+        }
+
+        month = date.getMonth() + 1;
+        switch(month){
+            case 1: return "Janeiro";
+            case 2: return "Fevereiro";
+            case 3: return "Março";
+            case 4: return "Abril";
+            case 5: return "Maio";
+            case 6: return "Junho";
+            case 7: return "Julho";
+            case 8: return "Agosto";
+            case 9: return "Setembro";
+            case 10: return "Outubro";
+            case 11: return "Novembro";
+            case 12: return "Dezembro";
+        }
+    } catch (err) {
+        console.error(err.name + ": " + err.message);
     }
 }
 
@@ -493,11 +568,11 @@ function visualizarRefeicao(codRefeicao){
     
     btnPesquisarRegistros.addEventListener("click", function(){
         formPesquisarRegistros.style.display = "block"; 
-    })
+    });
 
     // BOTÕES DE ACIONAMENTO: JANELA - PESQUISAR REGISTROS
 
-    let btnFiltrarPeriodo1 = document.getElementById("btn-filtrar-periodo-1");
+    let btnFiltrarPeriodo1 = document.getElementById("btn-filtrar-periodo");
     let btnFecharRegistros = document.getElementById("btn-fechar-registros"); 
 
     btnFecharRegistros.addEventListener("click", function(){
@@ -511,15 +586,88 @@ function visualizarRefeicao(codRefeicao){
 
     btnVerRelatorios.addEventListener("click", function(){
         formVerRelatorios.style.display = "block";
-    })
+        let dateObj = new Date();
+        let date = getDate(dateObj, "dateUS");
+        let month = getMonthName(dateObj);
+        let inpDateSemanal = document.getElementById('inp-date-semanal');
+        let selectMeses = document.getElementById('select-meses');
+        let inpAno1 = document.getElementById('inp-ano-1');
+        let inpAno2 = document.getElementById('inp-ano-2');
+
+        inpDateSemanal.value = date.replaceAll("/", "-");;
+        selectMeses.namedItem(month).selected = true;
+        inpAno1.value = getDate(dateObj, "year");
+        inpAno2.value = getDate(dateObj, "year");
+    });
     
     // BOTÕES DE ACIONAMENTO: JANELA - VER RELATÓRIOS
 
-    let btnFiltrarPeriodo2 = document.getElementById("btn-filtrar-periodo-2");
+    let btnGerarRelatorios = document.getElementById("btn-gerar-relatorios");
     let btnFecharRelatorios = document.getElementById("btn-fechar-relatorios");
+    let opcaoRelatorio = document.getElementById('select-opcoes-relatorios');
 
-    btnFiltrarPeriodo2.addEventListener("click", function(){
-        teste.innerText += "teste"; 
+    function desabilitarCampos(bool){
+        document.getElementById('radio-semanal').disabled = bool;
+        document.getElementById('radio-mensal').disabled = bool;
+        document.getElementById('inp-date-semanal').disabled = bool;
+        document.getElementById('select-meses').disabled = bool;
+        document.getElementById('inp-ano-1').disabled = bool;
+        document.getElementById('select-opcoes-graficos').disabled = bool;
+    }
+
+    opcaoRelatorio.addEventListener('change', function(){
+        let index = opcaoRelatorio.selectedIndex + 1;
+        if(index === 4){
+            desabilitarCampos(true);
+            document.getElementById('radio-anual').checked = true;
+        } else {
+            desabilitarCampos(false);
+        }
+    });
+
+    btnGerarRelatorios.addEventListener("click", function(){
+        document.querySelector('.container-refeicoes').innerHTML = '';
+        let periodoSelecionado = document.querySelector('input[name="radio-periodos"]:checked');
+        let selectOpcoesGrafico = document.getElementById('select-opcoes-graficos');
+        let index = opcaoRelatorio.selectedIndex + 1;
+        let opcoesGrafico = selectOpcoesGrafico.item(selectOpcoesGrafico.selectedIndex).text;
+        let url = 'http://127.0.0.1:3000/relatorio/';
+
+        if(index === 4){
+            let ano = document.getElementById('inp-ano-2').value;
+            url += `${index}/anual/${ano}`
+            request(url, (data)=>{
+                console.log(data);
+                grafico("Linha", data);
+            })
+        } else {
+            if(periodoSelecionado.value === "Semanal"){
+                let inpDateSemanal = document.getElementById('inp-date-semanal');
+                const [ano, mes, dia] = inpDateSemanal.value.split("-");
+                url += `${index}/semanal/${ano}/${mes}/${dia}`;
+                request(url, (data)=>{
+                    console.log(data);
+                    grafico(opcoesGrafico, data);
+                });
+            } else if(periodoSelecionado.value === "Mensal"){
+                let selectMeses = document.getElementById('select-meses');
+                let ano = document.getElementById('inp-ano-1').value;
+                let mes = selectMeses.value;
+                url += `${index}/mensal/${ano}/${mes}`;
+                request(url, (data)=>{
+                    console.log(data);
+                    grafico(opcoesGrafico, data);
+                });
+            } else if(periodoSelecionado.value === "Anual"){
+                let ano = document.getElementById('inp-ano-2').value;
+                url += `${index}/anual/${ano}`;
+                request(url, (data)=>{
+                    console.log(data);
+                    grafico(opcoesGrafico, data);
+                });
+            }
+        }
+        formVerRelatorios.style.display = 'none';
     })
 
     btnFecharRelatorios.addEventListener("click", function(){

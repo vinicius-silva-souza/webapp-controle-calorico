@@ -234,7 +234,89 @@ let insertTblRefeicao = function(data){
     return promise;
 }
 
-
+function relatorios(cod, periodo){
+    try {
+        let dataSemanal = 'BETWEEN date(?) AND date(?, "+6 days")';
+        let dataMensal = 'BETWEEN date(?) AND date(?, "+1 months", "-1 days")';
+        let dataAnual =  'BETWEEN date(?) AND date(?)';
+        let objRelatorios = {
+            rel1: function(periodo){
+                // (1) Consumo calórico por data
+                return 'SELECT Data_Refeicao, '.concat(
+                    'count(Data_Refeicao) AS "Num_Refeicoes", ',
+                    'sum(Total_kcal) AS "Total_kcal" ',
+                    'FROM TBL_Refeicao ',
+                    'WHERE Data_Refeicao ',
+                    `${periodo} `,
+                    'GROUP BY Data_Refeicao ',
+                    'ORDER BY Total_kcal DESC'
+                );
+            },
+            rel2: function(periodo){
+                // (2) Refeições com maior quantidade de caloria (agrupado por data)
+                return 'SELECT Nome_Refeicao, '.concat(
+                    'Data_Refeicao, ',
+                    'Hora, ',
+                    'max(Total_kcal) AS "Total_kcal" ',
+                    'FROM TBL_Refeicao ',
+                    'WHERE Data_Refeicao ',
+                    `${periodo} `,
+                    'GROUP BY Data_Refeicao ',
+                    'ORDER BY Total_kcal DESC'
+                );
+            },
+            rel3: function(periodo){
+                // (3) Refeições com menor quantidade de caloria (agrupado por data)
+                return 'SELECT Nome_Refeicao, '.concat(
+                    'Data_Refeicao, ',
+                    'Hora, ',
+                    'min(Total_kcal) AS "Total_kcal" ',
+                    'FROM TBL_Refeicao ',
+                    'WHERE Data_Refeicao ',
+                    `${periodo} `,
+                    'GROUP BY Data_Refeicao ',
+                    'ORDER BY Total_kcal ASC'
+                );
+            },
+            rel4: function(periodo){
+                // (4) Evolução calórica
+                return 'SELECT Data_Refeicao, '.concat(
+                    'count(Data_Refeicao) AS "Num_Refeicoes", ',
+                    'sum(Total_kcal) AS "Total_kcal" ',
+                    'FROM TBL_Refeicao ',
+                    'WHERE Data_Refeicao ',
+                    `${periodo} `,
+                    'GROUP BY Data_Refeicao ',
+                    'ORDER BY Hora ASC'
+                );
+            }
+        }
+    
+        if(typeof cod === 'number'){
+            if(typeof periodo === 'string'){
+                let index = `rel${cod}`;
+                let relatorio = objRelatorios[index];
+                switch (periodo) {
+                    case "semanal":
+                        return relatorio(dataSemanal);
+                    case "mensal":
+                        return relatorio(dataMensal);
+                    case "anual":
+                        return relatorio(dataAnual);
+                    default: 
+                        throw new TypeError("Código de relatório não encontrado");
+                }
+            } else {
+                throw new TypeError('O argumento fornecido ao parâmetro "periodo" não é do tipo "string"');
+            }
+        } else {
+            throw new TypeError('O argumento fornecido ao parâmetro "cod" não é do tipo "number"');
+        }
+    } catch (err) {
+        console.error(err.name + ": " + err.message);
+        return null;
+    }
+}
 
 async function iniciaServidor(){
     const server = new Hapi.Server({
@@ -769,6 +851,90 @@ async function iniciaServidor(){
             );
         }
     });
+
+    server.route({
+        method: 'GET', 
+        path: '/relatorio/{cod}/mensal/{ano}/{mes}',
+        options: {cors: {origin: ['*']}},
+        handler: function(request, reply){
+            let ano = encodeURIComponent(request.params.ano); 
+            let mes = encodeURIComponent(request.params.mes); 
+            let cod = Number.parseInt(request.params.cod); 
+            let data = `${ano}-${mes}-01`;
+            let sql = relatorios(cod, "mensal");
+            return obterDados(sql, [data, data]).then(
+                dados =>{
+                    let resp = reply.response(dados);
+                    resp.code(200);
+                    resp.type('application/json');
+                    return resp;
+                },
+                msgErro => {
+                    let resp = reply.response(msgErro);
+                    resp.code(204);
+                    resp.type('text/plain');
+                    return resp;
+                }
+            )
+        }
+    });
+
+    server.route({
+        method: 'GET', 
+        path: '/relatorio/{cod}/semanal/{ano}/{mes}/{dia}',
+        options: {cors: {origin: ['*']}},
+        handler: function(request, reply){
+            let ano = encodeURIComponent(request.params.ano); 
+            let mes = encodeURIComponent(request.params.mes); 
+            let dia = encodeURIComponent(request.params.dia); 
+            let cod = Number.parseInt(request.params.cod); 
+            let data = `${ano}-${mes}-${dia}`;
+            let sql = relatorios(cod, "semanal");
+            return obterDados(sql, [data, data]).then(
+                dados =>{
+                    let resp = reply.response(dados);
+                    resp.code(200);
+                    resp.type('application/json');
+                    return resp;
+                },
+                msgErro => {
+                    let resp = reply.response(msgErro);
+                    resp.code(204);
+                    resp.type('text/plain');
+                    return resp;
+                }
+            )
+        }
+    });
+
+    server.route({
+        method: 'GET', 
+        path: '/relatorio/{cod}/anual/{ano}',
+        options: {cors: {origin: ['*']}},
+        handler: function(request, reply){
+            let ano = encodeURIComponent(request.params.ano); 
+            let cod = Number.parseInt(request.params.cod); 
+            let dataInicial = `${ano}-01-01`;
+            let dataFinal = `${ano}-12-31`
+            let sql = relatorios(cod, "anual");
+            return obterDados(sql, [dataInicial, dataFinal]).then(
+                dados =>{
+                    let resp = reply.response(dados);
+                    resp.code(200);
+                    resp.type('application/json');
+                    return resp;
+                },
+                msgErro => {
+                    let resp = reply.response(msgErro);
+                    resp.code(204);
+                    resp.type('text/plain');
+                    return resp;
+                }
+            )
+        }
+    });
+
+   
 
     await server.start();
     console.log('Server started at: ' + server.info.uri);

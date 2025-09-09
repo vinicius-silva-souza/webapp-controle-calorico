@@ -2,3 +2,5 @@ Estrutara de dados complexas com JSON
 
 https://qawithexperts.com/article/javascript/nested-and-complex-json-examples/446
 https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Guide/Modules
+https://docs.github.com/pt/migrations/importing-source-code/using-the-command-line-to-import-source-code/adding-locally-hosted-code-to-github?platform=windows#como-adicionar-um-c%C3%B3digo-fonte-existente-ao-github
+https://docs.github.com/pt/repositories/configuring-branches-and-merges-in-your-repository/managing-branches-in-your-repository/changing-the-default-branch

@@ -206,3 +206,50 @@ BEGIN
 END;
 
 
+-- RELATORIOS
+
+-- filtro semanal (7 dias com base na data selecionada)
+SELECT date('2022-11-01') AS "Inicio_Semana"
+SELECT date('2022-11-01', '+6 days') AS "Fim_Semana"
+
+--filtro mensal
+SELECT date('2022-11-01') AS "Inicio_Mes"
+SELECT date('2022-11-01', '+1 months', '-1 days') AS "Fim_Mes"
+
+-- filtro anual
+SELECT date('2022-01-01') AS "Inicio_Ano"
+SELECT date('2022-12-31') AS "Fim_Ano"
+
+-- RELATORIO-01 (total de consumo calorico por data)
+SELECT Data_Refeicao, count(Data_Refeicao) AS "Num_Refeicoes", sum(Total_kcal) AS "Total_kcal"
+FROM TBL_Refeicao
+WHERE Data_Refeicao BETWEEN date('2025-01-01') AND date('2025-12-31')
+GROUP BY Data_Refeicao
+ORDER BY Total_kcal DESC
+
+-- RELATORIO-02 (a refeicao com a maior quantidade de caloria agrupado por data)
+SELECT Nome_Refeicao, Data_Refeicao, Hora, max(Total_kcal) AS "Total_kcal"
+FROM TBL_Refeicao
+GROUP BY Data_Refeicao
+ORDER BY Total_kcal DESC
+
+-- RELATORIO-03 (a refeicao com maior quantidade de caloria num determinado periodo)
+SELECT Nome_Refeicao, Data_Refeicao, Hora, max(Total_kcal) AS "Total_kcal"
+FROM TBL_Refeicao
+
+-- RELATORIO-04 (a refeicao com a menor quantidade de caloria agrupado por data)
+SELECT Nome_Refeicao, Data_Refeicao, Hora, min(Total_kcal) AS "Total_kcal"
+FROM TBL_Refeicao
+GROUP BY Data_Refeicao
+ORDER BY Total_kcal ASC
+
+-- RELATORIO-05 (a refeicao com menor quantidade de caloria num determinado periodo)
+SELECT Nome_Refeicao, Data_Refeicao, Hora, min(Total_kcal) AS "Total_kcal"
+FROM TBL_Refeicao
+
+-- evolucao calorica
+SELECT Data_Refeicao, count(Data_Refeicao) AS "Num_Refeicoes", sum(Total_kcal) AS "Total_kcal"
+FROM TBL_Refeicao
+WHERE Data_Refeicao BETWEEN date('2025-01-01') AND date('2025-12-31')
+GROUP BY Data_Refeicao
+ORDER BY Hora ASC
