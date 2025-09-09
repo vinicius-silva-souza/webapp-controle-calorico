@@ -66,6 +66,11 @@ A proposta é ser uma solução **prática, intuitiva e acessível**, que auxili
 ---
 
 ##  Protótipo / Telas
+- Tela de Início
+    - ![Primeira Imagem](assets/frontend1.png)
+- Navegação pelo app
+    - ![Segunda Imagem](assets/frontend2.png)
+
 
 ## Vídeo
 
